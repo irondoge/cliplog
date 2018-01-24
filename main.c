@@ -6,6 +6,12 @@
 enum { MY_LOGGER };
 #define FILE_NAME "clipboard.log"
 
+int usage(char *name)
+{
+  fprintf(stdout, "Usage: %s filename\nEx: clipboard.log\n", name);
+  return (EXIT_FAILURE);
+}
+
 void handle_owner_change (
   GtkClipboard *clipboard,
   GdkEvent *event,
@@ -20,9 +26,12 @@ void handle_owner_change (
     clog_info(CLOG(MY_LOGGER), "%s", text);
 }
 
-int main()
+int main(int ac, char **av)
 {
   GtkClipboard* clipboard;
+
+  if (ac != 2)
+    return (usage(*av));
 
   if (clog_init_path(MY_LOGGER, FILE_NAME))
   {
