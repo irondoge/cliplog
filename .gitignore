@@ -1,0 +1,6 @@
+# project shit
+cliplog
+*.log
+
+# C shit
+*.o
